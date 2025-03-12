@@ -1,71 +1,52 @@
 <template>
-  <h1>{{ title }}</h1>
-  <p>wellcome...</p>
-  <teleport to="#modals">
-    <Modal v-if="showModal" @close="toggleModal" theme="sale">
-      <template v-slot:links>
-        <a href="#">sign up now!</a>
-        <a href="#">more info</a>
-      </template>
-      <h1>Ninja Givaway!</h1>
-      <p>Grab your ninja swag for half price!</p>
-    </Modal>
-  </teleport>
-
-  <teleport to="#modals" v-if="showModalTwo">
-    <Modal @close="toggleModalTwo">
-      <h1>Sign up to the Newsletter</h1>
-      <p>For updates and promo codes!</p>
-    </Modal>
-  </teleport>
-
-  <button @click.alt="toggleModal">open modal (alt click)</button>
-  <button @click="toggleModalTwo">open modal 2</button>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start" :disabled="isPlaying">Start Game</button>
+  <Block v-if="isPlaying" :delay="delay" />
 </template>
 
 <script>
-import Modal from "./components/ModalComponent.vue";
+import Block from "./components/BlockComp.vue";
 
 export default {
   name: "App",
-  components: { Modal },
+  components: { Block },
   data() {
     return {
-      title: "My First Vue App!",
-      showModal: false,
-      showModalTwo: false,
+      isPlaying: false,
+      delay: null,
     };
   },
   methods: {
-    toggleModal() {
-      this.showModal = !this.showModal;
-    },
-    toggleModalTwo() {
-      this.showModalTwo = !this.showModalTwo;
+    start() {
+      this.delay = 2000 + Math.random() * 5000;
+      this.isPlaying = true;
     },
   },
 };
 </script>
+
 <style>
-#app,
-#modals {
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #444;
+  margin-top: 60px;
 }
-
-nav {
-  padding: 30px;
+button {
+  background: #0faf87;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin: 10px;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+button[disabled] {
+  opacity: 0.2;
+  cursor: not-allowed;
 }
 </style>
