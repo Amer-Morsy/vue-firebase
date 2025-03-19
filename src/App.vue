@@ -1,16 +1,14 @@
 <template>
-  <div id="app">
-    <h1>{{ title }}</h1>
-    <p>wellcome...</p>
-  </div>
+  <SignupForm />
 </template>
+
 <script>
+import SignupForm from "./components/SignupForm.vue";
+
 export default {
   name: "App",
-  data() {
-    return {
-      title: "My First Vue App!",
-    };
+  components: {
+    SignupForm,
   },
 };
 </script>
@@ -22,5 +20,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  margin: 0;
+  background: #eee;
 }
 </style>
