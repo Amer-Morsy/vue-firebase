@@ -1,11 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import TagView from "../views/TagView.vue";
 
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: HomeView,
+  },
+  {
+    path: "/posts/:id",
+    name: "Details",
+    component: () => import("../views/DetailsView.vue"),
+    props: true,
+  },
+  {
+    path: "/create",
+    name: "Create",
+    component: () => import("../views/CreateView.vue"),
+  },
+  {
+    path: "/tags/:tag",
+    name: "Tag",
+    component: () => TagView,
   },
   {
     path: "/about",
